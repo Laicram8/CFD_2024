@@ -9,6 +9,16 @@ import math
 import scipy.sparse as sp
 import scipy.linalg as scl
 from scipy.sparse.linalg import splu
+import argparse
+parser = argparse.ArgumentParser()
+parser.add_argument('-R',default=25,help="Choose from different model")
+parser.add_argument('-Lx',default=1,type=int,help="Number of samples used for prediction")
+parser.add_argument('-Ly',default=1,type=int,help="Number of samples used for prediction")
+parser.add_argument('-Nx',default=30,type=int,help="Number of samples used for prediction")
+parser.add_argument('-Ny',default=30,type=int,help="Number of samples used for prediction")
+parser.add_argument('-t',default=0.01,type=int,help="Number of samples used for prediction")
+args = parser.parse_args()
+
 params = {'legend.fontsize': 12,
           'legend.loc':'best',
           'figure.figsize': (8,5),
@@ -78,14 +88,14 @@ def toc():
 
 # Simulation parameters:
 Pr = 0.71
-Re = None
+Re = args.R
 # Ri = 0.
-dt = None
+dt = args.t
 Tf = 20
 Lx = 1.
 Ly = 1.
-Nx = None
-Ny = None
+Nx = args.Nx
+Ny = args.Ny
 namp = 0.
 ig = 200
 
@@ -96,8 +106,8 @@ Nit = None
 x = np.linspace(None)
 y = np.linspace(None)
 # grid spacing
-hx = None
-hy = None
+hx = args.Lx/args.Nx
+hy = args.Ly/args.Ny
 
 # boundary conditions
 Utop = 1.; Ttop = 1.; Tbottom = 0.;
